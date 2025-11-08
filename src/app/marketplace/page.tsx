@@ -1,9 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FilterBar } from "./components/filter-bar";
 import { InternshipCard } from "./components/internship-card";
@@ -27,75 +24,70 @@ export default function MarketplacePage() {
   };
 
   return (
-    <SidebarProvider defaultOpen={false}>
-      <AppSidebar />
-      <SidebarInset className="min-h-screen bg-slate-50">
-        <Header />
+    <div className="min-h-screen bg-slate-50">
+      <main className="container mx-auto px-4 py-8">
+        {/* Hero Section */}
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#002F66] mb-4">
+            Explore Erasmus+ Internship Opportunities
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-6">
+            Find verified placements across Europe that match your skills,
+            language, and goals. All opportunities are curated to meet Erasmus+
+            standards.
+          </p>
+        </div>
 
-        <main className="container mx-auto px-4 py-8">
-          {/* Hero Section */}
-          <div className="mb-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-[#002F66] mb-4">
-              Explore Erasmus+ Internship Opportunities
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-6">
-              Find verified placements across Europe that match your skills,
-              language, and goals. All opportunities are curated to meet
-              Erasmus+ standards.
-            </p>
-          </div>
+        {/* Filter Bar */}
+        <FilterBar />
 
-          {/* Filter Bar */}
-          <FilterBar />
-
-          {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-[1fr_340px] gap-6">
-            {/* Internships Grid */}
-            <div>
-              <div className="mb-4 flex items-center justify-between">
-                <p className="text-sm text-muted-foreground">
-                  Showing{" "}
-                  <span className="font-semibold text-foreground">
-                    {internships.length}
-                  </span>{" "}
-                  internships
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                {internships.map((internship) => (
-                  <InternshipCard
-                    key={internship.id}
-                    internship={internship}
-                    onViewDetails={handleViewDetails}
-                  />
-                ))}
-              </div>
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-[1fr_340px] gap-6">
+          {/* Internships Grid */}
+          <div>
+            <div className="mb-4 flex items-center justify-between">
+              <p className="text-sm text-muted-foreground">
+                Showing{" "}
+                <span className="font-semibold text-foreground">
+                  {internships.length}
+                </span>{" "}
+                internships
+              </p>
             </div>
 
-            {/* Sidebar */}
-            <aside className="space-y-6">
-              <TopEmployers />
-              <RecommendedDestinations />
-              <HelpfulResources />
-            </aside>
+            <div className="grid md:grid-cols-2 gap-6">
+              {internships.map((internship) => (
+                <InternshipCard
+                  key={internship.id}
+                  internship={internship}
+                  onViewDetails={handleViewDetails}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Employer Banner */}
-          <div className="mt-12">
-            <EmployerBanner />
-          </div>
-        </main>
+          {/* Sidebar */}
+          <aside className="space-y-6">
+            <TopEmployers />
+            <RecommendedDestinations />
+            <HelpfulResources />
+          </aside>
+        </div>
 
-        <Footer />
+        {/* Employer Banner */}
+        <div className="mt-12">
+          <EmployerBanner />
+        </div>
+      </main>
 
-        {/* Internship Detail Modal */}
-        <InternshipDetailModal
-          internship={selectedInternship}
-          open={modalOpen}
-          onOpenChange={setModalOpen}
-        />
-      </SidebarInset>
-    </SidebarProvider>
+      <Footer />
+
+      {/* Internship Detail Modal */}
+      <InternshipDetailModal
+        internship={selectedInternship}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+      />
+    </div>
   );
 }

@@ -31,9 +31,6 @@ import { LoginDialog } from "@/components/login-dialog";
 
 export function Header() {
   const pathname = usePathname();
-  const currentPage = pathname.startsWith("/marketplace")
-    ? "marketplace"
-    : "forum";
   const { user, openLoginDialog, logout } = useAuth();
 
   return (
@@ -44,7 +41,7 @@ export function Header() {
           <SidebarTrigger className="md:hidden" />
 
           {/* Logo */}
-          <Link href="/forum" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 bg-[#002F66] rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">C+</span>
             </div>
@@ -53,9 +50,9 @@ export function Header() {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-2">
-            <Link href="/forum">
+            <Link href="/">
               <Button
-                variant={currentPage === "forum" ? "default" : "ghost"}
+                variant={pathname === "/" ? "default" : "ghost"}
                 className="gap-2"
               >
                 <Home className="w-4 h-4" />
@@ -64,7 +61,7 @@ export function Header() {
             </Link>
             <Link href="/forum">
               <Button
-                variant={currentPage === "forum" ? "default" : "ghost"}
+                variant={pathname.startsWith("/forum") ? "default" : "ghost"}
                 className="gap-2"
               >
                 <MessageSquare className="w-4 h-4" />
@@ -73,7 +70,9 @@ export function Header() {
             </Link>
             <Link href="/marketplace">
               <Button
-                variant={currentPage === "marketplace" ? "default" : "ghost"}
+                variant={
+                  pathname.startsWith("/marketplace") ? "default" : "ghost"
+                }
                 className="gap-2"
               >
                 <Briefcase className="w-4 h-4" />

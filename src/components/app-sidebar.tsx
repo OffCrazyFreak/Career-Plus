@@ -48,27 +48,23 @@ const data = {
   navMain: [
     {
       title: "Home",
-      url: "/forum",
+      url: "/",
       icon: Home,
-      page: "forum" as const,
     },
     {
       title: "Forum",
       url: "/forum",
       icon: MessageSquare,
-      page: "forum" as const,
     },
     {
       title: "Marketplace",
       url: "/marketplace",
       icon: Briefcase,
-      page: "marketplace" as const,
     },
     {
       title: "Events",
       url: "/events",
       icon: Calendar,
-      page: "events" as const,
     },
   ],
   navSecondary: [
@@ -87,15 +83,13 @@ const data = {
 
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
-  const currentPage = pathname.startsWith("/marketplace")
-    ? "marketplace"
-    : "forum";
   const { user, openLoginDialog, logout } = useAuth();
 
-  // Update navMain items with isActive based on currentPage
+  // Update navMain items with isActive based on current pathname
   const navMainWithActive = data.navMain.map((item) => ({
     ...item,
-    isActive: item.page === currentPage,
+    isActive:
+      item.url === "/" ? pathname === "/" : pathname.startsWith(item.url),
   }));
 
   return (
@@ -104,7 +98,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href="/forum">
+              <Link href="/">
                 <div className="bg-[#002F66] text-white flex aspect-square size-8 items-center justify-center rounded-lg">
                   <span className="text-sm font-bold">C+</span>
                 </div>

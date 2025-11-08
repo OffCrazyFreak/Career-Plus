@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/auth-context";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { Header } from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Career+ Forum",
@@ -16,7 +19,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <SidebarProvider defaultOpen={false}>
+            <AppSidebar />
+            <SidebarInset className="m-0">
+              <Header />
+              {children}
+            </SidebarInset>
+          </SidebarProvider>
+        </AuthProvider>
       </body>
     </html>
   );
