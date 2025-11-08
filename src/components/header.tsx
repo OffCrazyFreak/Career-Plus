@@ -35,7 +35,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b shadow-sm">
-      <div className="flex items-center justify-between gap-8 px-4 py-4">
+      <div className="flex items-center justify-between gap-8 px-4 py-4 container mx-auto">
         {/* Mobile Sidebar Trigger */}
         <SidebarTrigger className="lg:hidden" />
 
