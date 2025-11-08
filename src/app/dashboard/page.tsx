@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
 import { StudentDashboard } from "@/components/dashboards/student-dashboard";
 import { EmployerDashboard } from "@/components/dashboards/employer-dashboard";
@@ -9,15 +7,19 @@ import { FacultyDashboard } from "@/components/dashboards/faculty-dashboard";
 import { CareerOfficeDashboard } from "@/components/dashboards/career-office-dashboard";
 
 export default function DashboardPage() {
-  const { user } = useAuth();
-  const router = useRouter();
+  const { user, isLoading } = useAuth();
 
-  useEffect(() => {
-    // Redirect if not authenticated
-    if (!user) {
-      router.push("/");
-    }
-  }, [user, router]);
+  // Show loading state while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#002F66] mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!user) {
     return null;

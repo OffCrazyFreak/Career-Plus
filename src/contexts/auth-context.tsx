@@ -17,6 +17,7 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
+  isLoading: boolean;
   login: (
     userType: "student" | "faculty" | "career-office" | "employer"
   ) => void;
@@ -53,6 +54,7 @@ const mockUsers = {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
 
   // Load user from localStorage on mount
@@ -60,12 +62,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const storedUser = localStorage.getItem("career-plus-user");
     if (storedUser) {
       try {
-        setUser(JSON.parse(storedUser));
+        const userData = JSON.parse(storedUser);
+        setUser(userData);
+        // Set cookie for middleware to access
+        document.cookie = `career-plus-user=${storedUser}; path=/; max-age=86400; SameSite=Lax`;
       } catch (error) {
         console.error("Failed to parse stored user:", error);
         localStorage.removeItem("career-plus-user");
+        document.cookie = "career-plus-user=; path=/; max-age=0";
       }
     }
+    setIsLoading(false);
   }, []);
 
   const login = (
@@ -73,13 +80,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   ) => {
     const userData = mockUsers[userType];
     setUser(userData);
-    localStorage.setItem("career-plus-user", JSON.stringify(userData));
+    const userJson = JSON.stringify(userData);
+    localStorage.setItem("career-plus-user", userJson);
+    // Set cookie for middleware to access
+    document.cookie = `career-plus-user=${userJson}; path=/; max-age=86400; SameSite=Lax`;
     setIsLoginDialogOpen(false);
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("career-plus-user");
+    // Remove cookie
+    document.cookie = "career-plus-user=; path=/; max-age=0";
+    // Redirect to home page
+    window.location.href = "/";
   };
 
   const openLoginDialog = () => {
@@ -94,6 +108,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
+        isLoading,
         login,
         logout,
         openLoginDialog,

@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
 import { StudentProfile } from "@/components/profile/student-profile";
 import { EmployerProfile } from "@/components/profile/employer-profile";
@@ -9,15 +7,19 @@ import { FacultyProfile } from "@/components/profile/faculty-profile";
 import { CareerOfficeProfile } from "@/components/profile/career-office-profile";
 
 export default function ProfilePage() {
-  const { user } = useAuth();
-  const router = useRouter();
+  const { user, isLoading } = useAuth();
 
-  useEffect(() => {
-    // Redirect if not authenticated
-    if (!user) {
-      router.push("/");
-    }
-  }, [user, router]);
+  // Show loading state while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#002F66] mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!user) {
     return null;
