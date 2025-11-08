@@ -152,18 +152,30 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent side="top" align="end" className="w-56">
-                  <Link href="/dashboard">
+                  <Link
+                    href={
+                      user.type === "student"
+                        ? "/dashboard"
+                        : user.type === "faculty"
+                        ? "/faculty-dashboard"
+                        : user.type === "employer"
+                        ? "/employer-dashboard"
+                        : "/career-office-dashboard"
+                    }
+                  >
                     <DropdownMenuItem className="cursor-pointer">
                       <LayoutDashboard className="w-4 h-4 mr-2" />
                       Dashboard
                     </DropdownMenuItem>
                   </Link>
-                  <Link href="/profile">
-                    <DropdownMenuItem className="cursor-pointer">
-                      <User className="w-4 h-4 mr-2" />
-                      Profile
-                    </DropdownMenuItem>
-                  </Link>
+                  {user.type === "student" && (
+                    <Link href="/profile">
+                      <DropdownMenuItem className="cursor-pointer">
+                        <User className="w-4 h-4 mr-2" />
+                        Profile
+                      </DropdownMenuItem>
+                    </Link>
+                  )}
                   <DropdownMenuItem className="cursor-pointer">
                     <Settings className="w-4 h-4 mr-2" />
                     Settings
