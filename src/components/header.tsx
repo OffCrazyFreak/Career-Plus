@@ -140,14 +140,12 @@ export function Header() {
                     Dashboard
                   </DropdownMenuItem>
                 </Link>
-                {user.type === "student" && (
-                  <Link href="/profile">
-                    <DropdownMenuItem className="cursor-pointer">
-                      <User className="w-4 h-4 mr-2" />
-                      Profile
-                    </DropdownMenuItem>
-                  </Link>
-                )}
+                <Link href="/profile">
+                  <DropdownMenuItem className="cursor-pointer">
+                    <User className="w-4 h-4 mr-2" />
+                    Profile
+                  </DropdownMenuItem>
+                </Link>
                 <DropdownMenuItem className="cursor-pointer">
                   <Settings className="w-4 h-4 mr-2" />
                   Settings
