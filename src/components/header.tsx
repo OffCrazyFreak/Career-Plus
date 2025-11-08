@@ -114,13 +114,13 @@ export function Header() {
                         .toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
-                  <div className="flex flex-col items-start">
+                  <div className="hidden md:flex flex-col items-start">
                     <span className="text-sm font-medium">{user.name}</span>
                     <span className="text-xs text-muted-foreground">
                       {user.email}
                     </span>
                   </div>
-                  <ChevronDown className="w-4 h-4 ml-2" />
+                  <ChevronDown className="hidden md:block w-4 h-4 ml-2" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">

@@ -38,6 +38,7 @@ import {
   SidebarMenuItem,
   SidebarGroup,
   SidebarGroupContent,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -84,6 +85,13 @@ const data = {
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
   const { user, openLoginDialog, logout } = useAuth();
+  const { setOpen, setOpenMobile } = useSidebar();
+
+  // Close sidebar on route change
+  React.useEffect(() => {
+    setOpen(false);
+    setOpenMobile(false);
+  }, [pathname]);
 
   // Update navMain items with isActive based on current pathname
   const navMainWithActive = data.navMain.map((item) => ({
