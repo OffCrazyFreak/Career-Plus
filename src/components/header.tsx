@@ -124,17 +124,7 @@ export function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
-                <Link
-                  href={
-                    user.type === "student"
-                      ? "/dashboard"
-                      : user.type === "faculty"
-                      ? "/faculty-dashboard"
-                      : user.type === "employer"
-                      ? "/employer-dashboard"
-                      : "/career-office-dashboard"
-                  }
-                >
+                <Link href="/dashboard">
                   <DropdownMenuItem className="cursor-pointer">
                     <LayoutDashboard className="w-4 h-4 mr-2" />
                     Dashboard
