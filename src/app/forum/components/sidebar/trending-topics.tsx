@@ -18,7 +18,7 @@ export function TrendingTopics({ topics }: TrendingTopicsProps) {
         {topics.map((topic, index) => (
           <div
             key={index}
-            className="flex items-start gap-2 text-sm hover:text-blue-600 cursor-pointer transition-colors"
+            className="flex items-start gap-2 text-sm hover:text-[#002F66] cursor-pointer transition-colors"
           >
             <span className="text-muted-foreground font-medium min-w-[20px]">
               {index + 1}.

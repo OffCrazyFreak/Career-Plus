@@ -218,9 +218,9 @@ export function LivingExpensesCalculator() {
     : 0;
 
   const getAffordabilityColor = (total: number) => {
-    if (total < 800) return "bg-green-500";
-    if (total < 1200) return "bg-yellow-500";
-    return "bg-red-500";
+    if (total < 800) return "bg-green-600";
+    if (total < 1200) return "bg-yellow-600";
+    return "bg-[#002F66]";
   };
 
   const getAffordabilityLabel = (total: number) => {

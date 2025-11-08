@@ -23,7 +23,7 @@ export function HelpfulResources() {
           <a
             key={index}
             href={resource.href}
-            className="block text-sm text-blue-600 hover:underline"
+            className="block text-sm text-[#002F66] hover:underline"
           >
             {resource.name}
           </a>

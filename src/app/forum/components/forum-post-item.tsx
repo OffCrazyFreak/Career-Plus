@@ -27,7 +27,7 @@ export function ForumPostItem({ post }: ForumPostItemProps) {
           {/* Avatar */}
           <Avatar className="w-10 h-10 ring-2 ring-background flex-shrink-0">
             <AvatarImage src={post.avatar} alt={post.author} />
-            <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white text-sm">
+            <AvatarFallback className="bg-[#002F66] text-white text-sm">
               {post.author
                 .split(" ")
                 .map((n) => n[0])
@@ -39,7 +39,7 @@ export function ForumPostItem({ post }: ForumPostItemProps) {
           <div className="flex-1 space-y-1.5 min-w-0">
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <h3 className="text-base font-semibold group-hover:text-blue-600 transition-colors line-clamp-1">
+                <h3 className="text-base font-semibold group-hover:text-[#002F66] transition-colors line-clamp-1">
                   {post.title}
                 </h3>
                 <div className="flex items-center gap-2 mt-0.5">
@@ -65,11 +65,11 @@ export function ForumPostItem({ post }: ForumPostItemProps) {
               </div>
 
               <div className="flex items-center gap-3 text-xs">
-                <div className="flex items-center gap-1 text-muted-foreground hover:text-blue-600 transition-colors">
+                <div className="flex items-center gap-1 text-muted-foreground hover:text-[#002F66] transition-colors">
                   <ThumbsUp className="w-3.5 h-3.5" />
                   <span className="font-medium">{post.upvotes}</span>
                 </div>
-                <div className="flex items-center gap-1 text-muted-foreground hover:text-purple-600 transition-colors">
+                <div className="flex items-center gap-1 text-muted-foreground hover:text-[#002F66] transition-colors">
                   <MessageCircle className="w-3.5 h-3.5" />
                   <span className="font-medium">{post.comments}</span>
                 </div>
