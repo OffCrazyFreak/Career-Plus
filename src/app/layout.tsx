@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased m-0 p-0">
         <AuthProvider>
           <SidebarProvider defaultOpen={false}>
             <AppSidebar />

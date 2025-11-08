@@ -44,7 +44,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-[#002F66] to-blue-900 text-white">
         <div className="absolute inset-0 bg-grid-white/10"></div>
-        <div className="container mx-auto px-4 py-20 relative">
+        <div className="mx-auto px-4 py-20 relative">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-white/20 text-white border-white/30">
               <Sparkles className="w-3 h-3 mr-1" />
