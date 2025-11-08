@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export function ForumFooter() {
+export function Footer() {
   return (
     <footer className="bg-[#002F66] text-slate-300 mt-16">
       <div className="container mx-auto px-4 py-8">
