@@ -22,6 +22,7 @@ import {
   User,
   Settings,
   LogOut,
+  Calendar,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -77,6 +78,15 @@ export function Header() {
               >
                 <Briefcase className="w-4 h-4" />
                 Marketplace
+              </Button>
+            </Link>
+            <Link href="/events">
+              <Button
+                variant={pathname === "/events" ? "default" : "ghost"}
+                className="gap-2"
+              >
+                <Calendar className="w-4 h-4" />
+                Events
               </Button>
             </Link>
           </nav>

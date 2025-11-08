@@ -14,6 +14,7 @@ import {
   User,
   Settings,
   LogOut,
+  Calendar,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -62,6 +63,12 @@ const data = {
       url: "/marketplace",
       icon: Briefcase,
       page: "marketplace" as const,
+    },
+    {
+      title: "Events",
+      url: "/events",
+      icon: Calendar,
+      page: "events" as const,
     },
   ],
   navSecondary: [

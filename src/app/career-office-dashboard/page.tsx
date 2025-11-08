@@ -134,27 +134,64 @@ const recentActivity = [
 const upcomingEvents = [
   {
     id: 1,
-    name: "Speed Networking Event",
+    name: "Online Speed Networking - Winter 2024",
+    type: "Speed Networking",
     date: "Nov 25, 2024",
-    location: "FER Zagreb",
-    participants: 45,
+    time: "14:00 - 17:00 CET",
+    location: "Virtual (Zoom)",
+    participants: {
+      students: 45,
+      employers: 12,
+      maxStudents: 60,
+      maxEmployers: 15,
+    },
     status: "confirmed",
+    price: {
+      students: "Free",
+      employers: "€150",
+    },
+    format: "5-minute sessions, 12 rotations",
   },
   {
     id: 2,
-    name: "Career Day 2025",
+    name: "Virtual International Career Day 2024",
+    type: "Career Day",
     date: "Dec 10, 2024",
-    location: "University Campus",
-    participants: 120,
+    time: "10:00 - 18:00 CET",
+    location: "Virtual Platform",
+    participants: {
+      students: 120,
+      employers: 25,
+      maxStudents: 200,
+      maxEmployers: 40,
+    },
     status: "planning",
+    price: {
+      students: "Free",
+      employers: "€200",
+    },
+    format: "Virtual tables, 5-person capacity",
+    partners: ["ESN Croatia", "TU Wien", "TU Munich"],
   },
   {
     id: 3,
-    name: "Employer Meet & Greet",
+    name: "Spring Internship Speed Networking",
+    type: "Speed Networking",
     date: "Jan 15, 2025",
-    location: "Online",
-    participants: 0,
+    time: "15:00 - 18:00 CET",
+    location: "Virtual (Microsoft Teams)",
+    participants: {
+      students: 0,
+      employers: 0,
+      maxStudents: 50,
+      maxEmployers: 12,
+    },
     status: "draft",
+    price: {
+      students: "Free",
+      employers: "€150",
+    },
+    format: "5-minute sessions, 10 rotations",
   },
 ];
 
@@ -610,73 +647,241 @@ export default function CareerOfficeDashboardPage() {
 
               {/* Events Tab */}
               <TabsContent value="events">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Event Management</CardTitle>
-                    <CardDescription>
-                      Organize Career Day, Speed Networking, and other events
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="rounded-md border">
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead>Event Name</TableHead>
-                            <TableHead>Date</TableHead>
-                            <TableHead>Location</TableHead>
-                            <TableHead>Participants</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Actions</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {upcomingEvents.map((event) => (
-                            <TableRow key={event.id}>
-                              <TableCell className="font-medium">
-                                {event.name}
-                              </TableCell>
-                              <TableCell>{event.date}</TableCell>
-                              <TableCell>{event.location}</TableCell>
-                              <TableCell>
-                                <Badge variant="secondary">
-                                  {event.participants}
-                                </Badge>
-                              </TableCell>
-                              <TableCell>
-                                <Badge
-                                  className={
-                                    event.status === "confirmed"
-                                      ? "bg-green-100 text-green-700"
-                                      : event.status === "planning"
-                                      ? "bg-blue-100 text-blue-700"
-                                      : "bg-gray-100 text-gray-700"
-                                  }
-                                >
-                                  {event.status.charAt(0).toUpperCase() +
-                                    event.status.slice(1)}
-                                </Badge>
-                              </TableCell>
-                              <TableCell>
-                                <div className="flex gap-2">
-                                  <Button size="sm" variant="outline">
-                                    Edit
-                                  </Button>
-                                  <Button
-                                    size="sm"
-                                    className="bg-[#002F66] hover:bg-[#004080]"
+                <div className="space-y-6">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <CardTitle>Event Management</CardTitle>
+                          <CardDescription>
+                            Create and manage Career Day and Speed Networking
+                            events
+                          </CardDescription>
+                        </div>
+                        <Button className="bg-[#002F66] hover:bg-[#004080]">
+                          <Calendar className="mr-2 h-4 w-4" />
+                          Create New Event
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-6">
+                        {upcomingEvents.map((event) => (
+                          <div
+                            key={event.id}
+                            className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+                          >
+                            <div className="flex items-start justify-between mb-4">
+                              <div>
+                                <div className="flex items-center gap-3 mb-2">
+                                  <Badge
+                                    variant="outline"
+                                    className={
+                                      event.type === "Speed Networking"
+                                        ? "border-blue-300 text-blue-700"
+                                        : "border-purple-300 text-purple-700"
+                                    }
                                   >
-                                    Manage
-                                  </Button>
+                                    {event.type}
+                                  </Badge>
+                                  <Badge
+                                    className={
+                                      event.status === "confirmed"
+                                        ? "bg-green-100 text-green-700"
+                                        : event.status === "planning"
+                                        ? "bg-blue-100 text-blue-700"
+                                        : "bg-gray-100 text-gray-700"
+                                    }
+                                  >
+                                    {event.status.charAt(0).toUpperCase() +
+                                      event.status.slice(1)}
+                                  </Badge>
                                 </div>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </div>
-                  </CardContent>
-                </Card>
+                                <h4 className="text-lg font-semibold text-[#002F66]">
+                                  {event.name}
+                                </h4>
+                              </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                              <div>
+                                <p className="text-sm font-medium text-gray-600 mb-2">
+                                  Date & Time
+                                </p>
+                                <div className="space-y-1">
+                                  <p className="text-sm text-gray-900">
+                                    {event.date}
+                                  </p>
+                                  <p className="text-sm text-gray-600">
+                                    {event.time}
+                                  </p>
+                                </div>
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-gray-600 mb-2">
+                                  Location
+                                </p>
+                                <p className="text-sm text-gray-900">
+                                  {event.location}
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-gray-600 mb-2">
+                                  Format
+                                </p>
+                                <p className="text-sm text-gray-900">
+                                  {event.format}
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 p-4 bg-gray-50 rounded-lg">
+                              <div>
+                                <p className="text-sm font-medium text-gray-600 mb-2">
+                                  Student Registrations
+                                </p>
+                                <div className="flex items-center gap-2">
+                                  <div className="flex-1 bg-gray-200 rounded-full h-2">
+                                    <div
+                                      className="bg-blue-600 h-2 rounded-full"
+                                      style={{
+                                        width: `${
+                                          (event.participants.students /
+                                            event.participants.maxStudents) *
+                                          100
+                                        }%`,
+                                      }}
+                                    ></div>
+                                  </div>
+                                  <span className="text-sm font-medium">
+                                    {event.participants.students} /{" "}
+                                    {event.participants.maxStudents}
+                                  </span>
+                                </div>
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-gray-600 mb-2">
+                                  Employer Registrations
+                                </p>
+                                <div className="flex items-center gap-2">
+                                  <div className="flex-1 bg-gray-200 rounded-full h-2">
+                                    <div
+                                      className="bg-purple-600 h-2 rounded-full"
+                                      style={{
+                                        width: `${
+                                          (event.participants.employers /
+                                            event.participants.maxEmployers) *
+                                          100
+                                        }%`,
+                                      }}
+                                    ></div>
+                                  </div>
+                                  <span className="text-sm font-medium">
+                                    {event.participants.employers} /{" "}
+                                    {event.participants.maxEmployers}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                              <div>
+                                <p className="text-sm font-medium text-gray-600 mb-1">
+                                  Pricing
+                                </p>
+                                <p className="text-sm text-gray-700">
+                                  Students: {event.price.students}
+                                </p>
+                                <p className="text-sm text-gray-700">
+                                  Employers: {event.price.employers}
+                                </p>
+                              </div>
+                              {event.partners && (
+                                <div>
+                                  <p className="text-sm font-medium text-gray-600 mb-1">
+                                    Partner Organizations
+                                  </p>
+                                  <div className="flex flex-wrap gap-1">
+                                    {event.partners.map((partner, i) => (
+                                      <Badge
+                                        key={i}
+                                        variant="secondary"
+                                        className="text-xs"
+                                      >
+                                        {partner}
+                                      </Badge>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+
+                            <div className="flex gap-2 pt-4 border-t">
+                              <Button size="sm" variant="outline">
+                                Edit Event
+                              </Button>
+                              <Button size="sm" variant="outline">
+                                Manage Registrations
+                              </Button>
+                              <Button size="sm" variant="outline">
+                                View Participants
+                              </Button>
+                              {event.status === "confirmed" && (
+                                <Button
+                                  size="sm"
+                                  className="bg-[#002F66] hover:bg-[#004080]"
+                                >
+                                  Send Invitations
+                                </Button>
+                              )}
+                              {event.status === "draft" && (
+                                <Button
+                                  size="sm"
+                                  className="bg-green-600 hover:bg-green-700"
+                                >
+                                  Publish Event
+                                </Button>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Event Creation Quick Guide */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Event Types</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="border border-blue-200 rounded-lg p-4 bg-blue-50">
+                          <h5 className="font-semibold text-blue-900 mb-2">
+                            Online Speed Networking
+                          </h5>
+                          <ul className="space-y-1 text-sm text-blue-800">
+                            <li>• 5-minute video sessions</li>
+                            <li>• Students rotate between employer tables</li>
+                            <li>• Focus on personal interaction</li>
+                            <li>• Employers pay participation fee</li>
+                          </ul>
+                        </div>
+                        <div className="border border-purple-200 rounded-lg p-4 bg-purple-50">
+                          <h5 className="font-semibold text-purple-900 mb-2">
+                            Virtual International Career Day
+                          </h5>
+                          <ul className="space-y-1 text-sm text-purple-800">
+                            <li>• Virtual table (video rooms) format</li>
+                            <li>• Up to 5 participants per table</li>
+                            <li>• Free-flowing networking</li>
+                            <li>• Co-organized with ESN and partners</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </TabsContent>
 
               {/* Partners Tab */}
