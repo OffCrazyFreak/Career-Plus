@@ -1,24 +1,19 @@
-# Company Database (Mark I v2)
+# Career+
 
 ## Description
 
-Company Database (CDB) is a lightweight admin application for managing organizations, projects and collaborations. It provides an administrative UI to:
+**Career+** is a digital platform prototype designed to support students in finding, applying for, and managing international Erasmus+ internships. It serves as a unified space connecting students, employers (companies and academic institutions), and universities — simplifying administrative processes, sharing knowledge, and building a European career network centered around the University of Zagreb.
 
-- Create, read, update and delete companies and their contacts
-- Manage projects and associate collaborations with companies and projects
-- Track collaboration status, responsible persons, contact history and achieved values
+This is a **frontend-only mockup** built to demonstrate the concept and user interface of the platform.
 
-The app is built with Next.js (App Router), TypeScript, React Query for data fetching, React Hook Form + Zod for form validation, and a local SQLite database for storage. It's intentionally simple and optimized for internal use by teams managing outreach, partnerships and project tracking.
+## Live Demo
 
-## Link
-
-Deployed and available on [new.cdb.best.hr](https://new.cdb.best.hr)
+**Deployed on Netlify:** [https://jj-career-plus.netlify.app/](https://jj-career-plus.netlify.app/)
 
 ## Visuals
 
 <p align="center">
-  <!-- <img width="90%" src="https://github.com/user-attachments/assets/56afa2df-c77f-454a-93c7-34331ebc2a7d" alt="Company Database - Home page"/>
-  -->
+  <!-- Screenshots coming soon -->
 </p>
 
 ## Attribution
@@ -44,9 +39,17 @@ This work is licensed under a
   npm install -g pnpm
   ```
 
-#### Install Dependencies
+### Install Dependencies
 
 ```bash
 # Install main dependencies
-pnpm install .
+pnpm install
 ```
+
+### Run Development Server
+
+```bash
+pnpm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
