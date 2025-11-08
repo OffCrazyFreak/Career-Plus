@@ -4,6 +4,7 @@ import { AuthProvider } from "@/contexts/auth-context";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Header } from "@/components/header";
+import { JarvisFab } from "@/components/jarvis-fab";
 
 export const metadata: Metadata = {
   title: "Career+ Forum",
@@ -27,6 +28,7 @@ export default function RootLayout({
               {children}
             </SidebarInset>
           </SidebarProvider>
+          <JarvisFab />
         </AuthProvider>
       </body>
     </html>
