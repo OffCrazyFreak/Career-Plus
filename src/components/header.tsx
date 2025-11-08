@@ -2,16 +2,38 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Search, Home, MessageSquare, Briefcase, LogIn } from "lucide-react";
+import {
+  Search,
+  Home,
+  MessageSquare,
+  Briefcase,
+  LogIn,
+  ChevronDown,
+  LayoutDashboard,
+  User,
+  Settings,
+  LogOut,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/contexts/auth-context";
+import { LoginDialog } from "@/components/login-dialog";
 
 export function Header() {
   const pathname = usePathname();
   const currentPage = pathname.startsWith("/marketplace")
     ? "marketplace"
     : "forum";
+  const { user, openLoginDialog, logout } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b shadow-sm">
@@ -59,7 +81,7 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* Search & Login */}
+          {/* Search & Login/User */}
           <div className="flex items-center gap-2">
             <div className="hidden lg:flex items-center gap-2">
               <div className="relative">
@@ -67,13 +89,66 @@ export function Header() {
                 <Input placeholder="Search..." className="pl-9 w-64" />
               </div>
             </div>
-            <Button variant="outline" className="gap-2">
-              <LogIn className="w-4 h-4" />
-              Login
-            </Button>
+
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="gap-2 h-auto py-2 px-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  >
+                    <Avatar className="w-8 h-8">
+                      <AvatarFallback className="bg-[#002F66] text-white text-sm">
+                        {user.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col items-start">
+                      <span className="text-sm font-medium">{user.name}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {user.email}
+                      </span>
+                    </div>
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuItem className="cursor-pointer">
+                    <LayoutDashboard className="w-4 h-4 mr-2" />
+                    Dashboard
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    <User className="w-4 h-4 mr-2" />
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    <Settings className="w-4 h-4 mr-2" />
+                    Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logout} className="cursor-pointer">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button
+                variant="outline"
+                className="gap-2"
+                onClick={openLoginDialog}
+              >
+                <LogIn className="w-4 h-4" />
+                Login
+              </Button>
+            )}
           </div>
         </div>
       </div>
+      <LoginDialog />
     </header>
   );
 }

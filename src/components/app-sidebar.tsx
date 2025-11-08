@@ -9,11 +9,24 @@ import {
   Send,
   Search,
   LogIn,
+  ChevronDown,
+  LayoutDashboard,
+  User,
+  Settings,
+  LogOut,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Sidebar,
   SidebarContent,
@@ -27,6 +40,8 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/contexts/auth-context";
+import { LoginDialog } from "@/components/login-dialog";
 
 const data = {
   navMain: [
@@ -68,6 +83,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   const currentPage = pathname.startsWith("/marketplace")
     ? "marketplace"
     : "forum";
+  const { user, openLoginDialog, logout } = useAuth();
 
   // Update navMain items with isActive based on currentPage
   const navMainWithActive = data.navMain.map((item) => ({
@@ -113,15 +129,58 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="gap-2">
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <SidebarMenuButton className="h-auto py-2">
+                    <Avatar className="w-8 h-8">
+                      <AvatarFallback className="bg-[#002F66] text-white text-sm">
+                        {user.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col items-start flex-1">
+                      <span className="text-sm font-medium">{user.name}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {user.email}
+                      </span>
+                    </div>
+                    <ChevronDown className="w-4 h-4 ml-auto" />
+                  </SidebarMenuButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side="top" align="end" className="w-56">
+                  <DropdownMenuItem className="cursor-pointer">
+                    <LayoutDashboard className="w-4 h-4 mr-2" />
+                    Dashboard
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    <User className="w-4 h-4 mr-2" />
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    <Settings className="w-4 h-4 mr-2" />
+                    Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logout} className="cursor-pointer">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <SidebarMenuButton onClick={openLoginDialog}>
                 <LogIn className="w-4 h-4" />
                 <span>Login</span>
-              </a>
-            </SidebarMenuButton>
+              </SidebarMenuButton>
+            )}
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
+      <LoginDialog />
     </Sidebar>
   );
 }
