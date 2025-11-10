@@ -13,7 +13,7 @@ This is a **frontend-only mockup** built to demonstrate the concept and user int
 ## Visuals
 
 <p align="center">
-  <!-- Screenshots coming soon -->
+  <img width="90%" src="https://github.com/user-attachments/assets/c472feda-5d8b-4164-8767-b4396e651caa" alt="Career+"/>
 </p>
 
 ## Attribution
