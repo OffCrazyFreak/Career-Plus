@@ -2,7 +2,7 @@
 
 ## Description
 
-**Career+** is a digital platform prototype designed to support students in finding, applying for, and managing international Erasmus+ internships. It serves as a unified space connecting students, employers (companies and academic institutions), and universities — simplifying administrative processes, sharing knowledge, and building a European career network centered around the University of Zagreb.
+**Career+** is a digital platform prototype designed to support students in finding, applying for, and managing international Erasmus+ internships. It serves as a unified space connecting students, employers (companies and academic institutions), and universities by simplifying administrative processes, sharing knowledge, and building a European career network centered around the University of Zagreb.
 
 This is a **frontend-only mockup** built to demonstrate the concept and user interface of the platform.
 
